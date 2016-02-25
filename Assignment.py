@@ -4,14 +4,14 @@ from PIL import Image, ImageTk
 
 modulelist = ["Chinese","OOP","Operating Systems","Data Communications","SFGM","Alorithms"]
 dropped_module_list = []
-
+    
 def main():
-    """root = Tk()"""
-    w_root = Tk()
-    welcome_root(w_root)
-    """gui_init(root)"""
-    #w_root.mainloop()
-    #root.mainloop()
+     """root = Tk()"""
+     w_root = Tk()
+     welcome_root(w_root)
+     """gui_init(root)"""
+     #w_root.mainloop()
+     #root.mainloop()
 
 def gui_init(root):
     """ Main Frame """
@@ -39,7 +39,7 @@ def gui_init(root):
     listbox_drop = Listbox(root)
     for item in dropped_module_list:
         listbox_drop.insert(END,item)
-    listbox_drop.place(x=5,y=275)
+        listbox_drop.place(x=5,y=275)
 
 def welcome_root(root):
     """ Welcome Interface """
@@ -66,13 +66,20 @@ def welcome_root(root):
     name.place(x=150,y=150)
     password = Entry(root,show = "*")
     password.place(x=150,y=170)
+    """ Quit Button """
+    quitButton = Button(root,text = "Quit",command = client_exit)
+    quitButton.place(x=255,y=265)
 
-    
-
-
-    
+def client_exit():
+    exit()
     
 main()
+       
+
+
+        
+        
+
 
 
 
