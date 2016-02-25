@@ -1,86 +1,52 @@
+import tkinter as tk
 from tkinter import *
+from tkinter import ttk
 from PIL import Image, ImageTk
 
 
-modulelist = ["Chinese","OOP","Operating Systems","Data Communications","SFGM","Alorithms"]
-dropped_module_list = []
-    
-def main():
-     """root = Tk()"""
-     w_root = Tk()
-     welcome_root(w_root)
-     """gui_init(root)"""
-     #w_root.mainloop()
-     #root.mainloop()
+class Welcome( Frame ):
+    def __init__( self ):
+        tk.Frame.__init__(self)
+        self.master.title("Welcome Menu")
+        self.configure(background='#00b7ea')
+        self.pack()
+        """ logo """
+        load = Image.open("welcome.jpg")
+        render = ImageTk.PhotoImage(load)
+        img = Label(self,image = render)
+        img.image = render
+        img.grid( row = 0, column = 0, columnspan = 2, sticky = W+E+N+S )
+        """ Details """
+        self.n_label = Label(self,text = "Username", bg = '#00b7ea')
+        self.n_label.grid( row = 5, column = 0, columnspan = 2, sticky = W+E+N+S )
+        self.p_label = Label(self,text = "Password", bg = '#00b7ea')
+        self.p_label.grid( row = 6, column = 0, columnspan = 2, sticky = W+E+N+S )
+        self.cs_label = Label(self,text = "*Passwords are Case Sensitive",font = ("Purisa",7), bg = '#00b7ea')
+        self.cs_label.grid( row = 7, column = 2, columnspan = 2, sticky = W+E+N+S )
+        self.name = Entry(self)
+        self.name.grid( row = 5, column = 2, columnspan = 2, sticky = W+E+N+S )
+        self.password = Entry(self,show = "*")
+        self.password.grid( row = 6, column = 2, columnspan = 2, sticky = W+E+N+S )
+        quitButton = Button(self,text = "Quit", bg = '#FFFFFF')
+        quitButton.grid( row = 8, column = 3, columnspan = 1, sticky = W+E+N+S )
+        confirmButton = Button(self,text = "Confirm", bg = '#FFFFFF')
+        confirmButton.grid( row = 8, column = 2, columnspan = 1, sticky = W+E+N+S )
 
-def gui_init(root):
-    """ Main Frame """
-    w = 500
-    h = 500
-    x = 50
-    y = 100
-    root.geometry("%dx%d+%d+%d" % (w,h,x,y))
-    root.title('WebCourses')
-    """ Logo """
-    load = Image.open("webcourses.jpg")
-    render = ImageTk.PhotoImage(load)
-    img = Label(root,image = render)
-    img.image = render
-    img.place(x=0,y=0)
-    """ Modules List """
-    """ Current Modules """
-    listbox = Listbox(root)
-    listbox.insert(END)
-    for item in modulelist:
-        listbox.insert(END,item)
-    listbox.place(x=5,y=100)
-    lb = Listbox(root)
-    """ Dropped Modules """
-    listbox_drop = Listbox(root)
-    for item in dropped_module_list:
-        listbox_drop.insert(END,item)
-        listbox_drop.place(x=5,y=275)
+    def close_window(self):
+        exit()
 
-def welcome_root(root):
-    """ Welcome Interface """
-    root.title("Welcome Menu")
-    w = 300
-    h = 300
-    x = 50
-    y = 100
-    root.geometry("%dx%d+%d+%d" % (w,h,x,y))
-    """ Logo """
-    load = Image.open("welcome.jpg")
-    render = ImageTk.PhotoImage(load)
-    img = Label(root,image = render)
-    img.image = render
-    img.place(x=0,y=0)
-    """ Entry Details """
-    n_label = Label(root,text = "Username")
-    n_label.place(x=80,y=150)
-    p_label = Label(root,text = "Password")
-    p_label.place(x=80,y=170)
-    cs_label = Label(root,text = "Passwords are Case Sensitive",font = ("Purisa",7))
-    cs_label.place(x=150,y=190)
-    name = Entry(root)
-    name.place(x=150,y=150)
-    password = Entry(root,show = "*")
-    password.place(x=150,y=170)
-    """ Quit Button """
-    quitButton = Button(root,text = "Quit",command = client_exit)
-    quitButton.place(x=255,y=265)
+class Main_Menu(Frame):     
+    def __init__(self):
+        new = tk.Frame.__init__(self)
+        new.title("Demo 2")
+        new.button = tk.Button(  text = "Button 2", width = 25,command = self.close_window )
+        new.button.pack()
 
-def client_exit():
-    exit()
-    
-main()
-       
+    def close_window(self):
+        self.destroy()
 
+def main(): 
+    Welcome().mainloop()
 
-        
-        
-
-
-
-
-
+if __name__ == '__main__':
+    main()
