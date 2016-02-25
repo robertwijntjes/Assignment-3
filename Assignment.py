@@ -56,11 +56,16 @@ def welcome_root(root):
     img.image = render
     img.place(x=0,y=0)
     """ Entry Details """
+    n_label = Label(root,text = "Username")
+    n_label.place(x=80,y=150)
+    p_label = Label(root,text = "Password")
+    p_label.place(x=80,y=170)
+    cs_label = Label(root,text = "Passwords are Case Sensitive",font = ("Purisa",7))
+    cs_label.place(x=150,y=190)
     name = Entry(root)
-    name.place(x=150,y=20)
-    name.label("Login Name")
-    password = Entry(root)
-    password.place(x=150,y=40)
+    name.place(x=150,y=150)
+    password = Entry(root,show = "*")
+    password.place(x=150,y=170)
 
     
 
