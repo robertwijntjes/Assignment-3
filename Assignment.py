@@ -36,15 +36,13 @@ class Welcome( Frame ):
         exit()
 
     def confirm_window(self):
-        self.newWindow = Main_Menu()
+        newWindow = Main_Menu()
+
         
 class Main_Menu(Frame):     
     def __init__(self):
-        tk.Frame.__init__(self)
-        self.master.title("Welcome Menu")
-        self.configure(background='#00b7ea')
-        self.pack()
-        b1 = Button(self,text = "Confirm")
+        root = Tk()
+        
 
     def close_window(self):
         pass
