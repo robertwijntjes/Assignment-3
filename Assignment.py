@@ -27,24 +27,27 @@ class Welcome( Frame ):
         self.name.grid( row = 5, column = 2, columnspan = 2, sticky = W+E+N+S )
         self.password = Entry(self,show = "*")
         self.password.grid( row = 6, column = 2, columnspan = 2, sticky = W+E+N+S )
-        quitButton = Button(self,text = "Quit", bg = '#FFFFFF')
+        quitButton = Button(self,text = "Quit", bg = '#FFFFFF',command = self.close_window)
         quitButton.grid( row = 8, column = 3, columnspan = 1, sticky = W+E+N+S )
-        confirmButton = Button(self,text = "Confirm", bg = '#FFFFFF')
+        confirmButton = Button(self,text = "Confirm", bg = '#FFFFFF', command = self.confirm_window )
         confirmButton.grid( row = 8, column = 2, columnspan = 1, sticky = W+E+N+S )
 
     def close_window(self):
         exit()
 
+    def confirm_window(self):
+        self.newWindow = Main_Menu()
+        
 class Main_Menu(Frame):     
     def __init__(self):
-        new = tk.Frame.__init__(self)
-        new.title("Demo 2")
-        new.button = tk.Button(  text = "Button 2", width = 25,command = self.close_window )
-        new.button.pack()
+        tk.Frame.__init__(self)
+        self.master.title("Welcome Menu")
+        self.configure(background='#00b7ea')
+        self.pack()
+        b1 = Button(self,text = "Confirm")
 
     def close_window(self):
-        self.destroy()
-
+        pass
 def main(): 
     Welcome().mainloop()
 
