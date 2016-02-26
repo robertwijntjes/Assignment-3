@@ -3,6 +3,8 @@ from tkinter import *
 from tkinter import ttk
 from PIL import Image, ImageTk
 
+modulelist = ["Chinese","OOP","Operating Systems","Data Communications","SFGM","Alorithms"]
+dropped_module_list = []
 
 class Welcome( Frame ):
     def __init__( self ):
@@ -36,12 +38,36 @@ class Welcome( Frame ):
         exit()
 
     def confirm_window(self):
-        newWindow = Main_Menu()
+        self.newWindow = Main_Menu()
 
         
 class Main_Menu(Frame):     
     def __init__(self):
-        root = Tk()
+        new = Tk()
+        new.title("Welcome" """ Entered name goes here """)
+        new.configure(background = '#00b7ea')
+        w = 500
+        h = 500
+        x = 50
+        y = 100
+        new.geometry("%dx%d+%d+%d" % (w,h,x,y))
+        """ Modules List """
+        """ Current Modules """
+        listbox = Listbox(new)
+        listbox.insert(END)
+        for item in modulelist:
+            listbox.insert(END,item)
+        listbox.place(x=5,y=100)
+        lb = Listbox(new)
+        """ Dropped Modules """
+        listbox_drop = Listbox(new)
+        for item in dropped_module_list:
+            listbox_drop.insert(END,item)
+        listbox_drop.place(x=5,y=275)
+
+        
+        
+
         
 
     def close_window(self):
