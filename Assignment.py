@@ -12,7 +12,10 @@ class Welcome( Frame ):
         self.master.title("Welcome Menu")
         self.configure(background='#00b7ea')
         self.pack()
+        self.make_gui()
         """ logo """
+
+    def make_gui(self):
         load = Image.open("welcome.jpg")
         render = ImageTk.PhotoImage(load)
         img = Label(self,image = render)
@@ -29,22 +32,26 @@ class Welcome( Frame ):
         self.name.grid( row = 5, column = 2, columnspan = 2, sticky = W+E+N+S )
         self.password = Entry(self,show = "*")
         self.password.grid( row = 6, column = 2, columnspan = 2, sticky = W+E+N+S )
-        quitButton = Button(self,text = "Quit", bg = '#FFFFFF',command = self.close_window)
+        quitButton = Button(self,text = "Quit", bg = '#FFFFFF' , command = self.quit_button)
         quitButton.grid( row = 8, column = 3, columnspan = 1, sticky = W+E+N+S )
-        confirmButton = Button(self,text = "Confirm", bg = '#FFFFFF', command = self.confirm_window )
+        confirmButton = Button(self,text = "Login", bg = '#FFFFFF',command = lambda : self.input_check(self.name.get()))
         confirmButton.grid( row = 8, column = 2, columnspan = 1, sticky = W+E+N+S )
+        
 
-    def close_window(self):
+    def quit_button(self):
         exit()
 
-    def confirm_window(self):
-        self.newWindow = Main_Menu()
+    def input_check(self,name):
+        print (name)
+        print ("hello")
+
+
 
         
 class Main_Menu(Frame):     
     def __init__(self):
         new = Tk()
-        new.title("Welcome" """ Entered name goes here """)
+        new.title("Webcourses")
         new.configure(background = '#00b7ea')
         w = 500
         h = 500
@@ -65,6 +72,12 @@ class Main_Menu(Frame):
             listbox_drop.insert(END,item)
         listbox_drop.place(x=5,y=275)
 
+
+    def drop_module():
+        pass
+
+    def add_module():
+        pass
         
         
 
