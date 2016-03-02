@@ -7,6 +7,7 @@ modulelist = ["Chinese","OOP","Operating Systems","Data Communications","SFGM","
 member_list = ['c14356786']
 password_list = ['password']
 dropped_module_list = []
+counter = 0
 
 class Welcome( Frame ):
     def __init__( self ):
@@ -34,9 +35,9 @@ class Welcome( Frame ):
         self.name.grid( row = 5, column = 2, columnspan = 2, sticky = W+E+N+S )
         self.password = Entry(self,show = "*")
         self.password.grid( row = 6, column = 2, columnspan = 2, sticky = W+E+N+S )
-        quitButton = Button(self,text = "Quit", bg = '#FFFFFF' , command = self.quit_button)
+        self.quitButton = Button(self,text = "Quit", bg = '#FFFFFF' , command = self.quit_button)
         self.quitButton.grid( row = 8, column = 3, columnspan = 1, sticky = W+E+N+S )
-        confirmButton = Button(self,text = "Login", bg = '#FFFFFF',command = lambda : self.input_check(self.name.get(),self.password.get()))
+        self.confirmButton = Button(self,text = "Login", bg = '#FFFFFF',command = lambda : self.input_check(self.name.get(),self.password.get()))
         self.confirmButton.grid( row = 8, column = 2, columnspan = 1, sticky = W+E+N+S )
         
 
@@ -44,6 +45,7 @@ class Welcome( Frame ):
         exit()
 
     def input_check(self,name,password):
+        counter = 0
         for item in member_list:
             if(name == item ):
                 for item in password_list:
@@ -54,10 +56,12 @@ class Welcome( Frame ):
 
             else:
                 print ("Incorrect Username")
-
+                if(counter == 0):
+                    self.label = Label(self,text ="Incorrect Password/Username" , bg = '#00b7ea',font = ("Purisa",7), fg = 'red')
+                    self.label.grid( row = 9, column = 2, columnspan = 2, sticky = W+E+N+S )
+                else:
+                    counter = counter + 1
                 
-
-
 
         
 class Main_Menu(Frame):     
@@ -83,41 +87,11 @@ class Main_Menu(Frame):
         for item in dropped_module_list:
             listbox_drop.insert(END,item)
         listbox_drop.place(x=5,y=275)
-
-
-    def drop_module():
-        pass
-
-    def add_module():
-        pass
-         
-
-    def close_window(self):
-        pass
-
-class Error_Box(Frame):     
-    def __init__(self):
-        tk.Frame.__init__(self)
-        self.master.title("Error")
-        self.pack()
-        w = 250
-        h = 100
-        x = 50
-        y = 100
-        self.error_msg = Label(self, text = "Incorrect Username/Password Submission")
-        self.error_msg.grid( row = 2, column = 1, columnspan = 1, sticky = W+E+N+S )
-        self.button = Button(self, text = "Ok")
-        self.button.grid(row = 3, column = 1 , columnspan = 1, sticky = W+E+N+S )
-        
-        
-        
-
         
 
 
 def main(): 
-    """Welcome().mainloop()"""
-    Error_Box().mainloop()
+    Welcome().mainloop()
 
 if __name__ == '__main__':
     main()
