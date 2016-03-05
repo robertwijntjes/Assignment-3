@@ -39,7 +39,18 @@ class Welcome( Frame ):
         self.quitButton.grid( row = 8, column = 3, columnspan = 1, sticky = W+E+N+S )
         self.confirmButton = Button(self,text = "Login", bg = '#FFFFFF',command = lambda : self.input_check(self.name.get(),self.password.get()))
         self.confirmButton.grid( row = 8, column = 2, columnspan = 1, sticky = W+E+N+S )
+        self.new_account_button = Button(self, text = "New Account", bg = '#FFFFFF' ,command = lambda : self.new_account(self.name.get(),self.password.get()))
+        self.new_account_button.grid( row = 8, column = 0, columnspan = 2, sticky = W+E+N+S )
         
+
+
+    def new_account(self,name,password):
+        for item in member_list:
+            if(name == item ):
+                self.label = Label(self,text = "Account exists", bg = '#00b7ea', font = ("Purisa",7), fg = 'red')
+                self.label.grid(row = 9,column = 1 ,columnspan = 1,sticky = W+E+N+S)
+        
+
 
     def quit_button(self):
         exit()
@@ -53,6 +64,8 @@ class Welcome( Frame ):
                         Main_Menu()
                     else:
                         print ("Incorrect Password")
+                        self.label = Label(self,text ="Incorrect Password/Username" , bg = '#00b7ea',font = ("Purisa",7), fg = 'red')
+                        self.label.grid( row = 9, column = 2, columnspan = 2, sticky = W+E+N+S )
 
             else:
                 print ("Incorrect Username")
