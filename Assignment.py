@@ -57,14 +57,7 @@ class Welcome( Frame ):
             member_list.append(name)
             password_list.append(password)
         print (member_list)
-        print (password_list)
-
-    
-                
-                
-                
-        
-
+        print (password_list)         
 
     def quit_button(self):
         exit()
@@ -75,7 +68,7 @@ class Welcome( Frame ):
             if(name == item ):
                 for item in password_list:
                     if(password == item):
-                        Main_Menu()
+                        Main_Menu().mainloop()
                     else:
                         print ("Incorrect Password")
                         self.label = Label(self,text ="Incorrect Password/Username" , bg = '#00b7ea',font = ("Purisa",7), fg = 'red')
@@ -96,24 +89,29 @@ class Main_Menu(Frame):
         new = Tk()
         new.title("Webcourses")
         new.configure(background = '#00b7ea')
-        w = 500
-        h = 500
-        x = 50
-        y = 100
-        new.geometry("%dx%d+%d+%d" % (w,h,x,y))
-        """ Modules List """
         """ Current Modules """
+        top = len(member_list)
+        name = member_list[0:top]
+        print (name)
         listbox = Listbox(new)
         listbox.insert(END)
         for item in modulelist:
             listbox.insert(END,item)
-        listbox.place(x=5,y=100)
+        listbox.grid( row = 2, column = 1, columnspan = 1, sticky = W+E+N+S )
         lb = Listbox(new)
         """ Dropped Modules """
         listbox_drop = Listbox(new)
         for item in dropped_module_list:
             listbox_drop.insert(END,item)
-        listbox_drop.place(x=5,y=275)
+        listbox_drop.grid( row = 3, column = 1, columnspan = 1, sticky = W+E+N+S )
+        """ Entry Box """
+        signout_button = Button(new,text = "Sign-Out" )
+        signout_button.grid( row = 1, column = 3, columnspan = 1, sticky = W+E+N+S )
+        grades_button = Button(new,text = "My Grades" )
+        grades_button.grid( row = 1, column = 1, columnspan = 1, sticky = W+E+N+S )
+        """ Interface """
+        name_label = Label(new , text = name, bg = '#00b7ea')
+        name_label.grid( row = 1, column = 2, columnspan = 1, sticky = W+E+N+S )
         
 
 
