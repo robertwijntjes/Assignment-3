@@ -8,6 +8,7 @@ member_list = ['c14356786']
 password_list = ['password']
 dropped_module_list = []
 counter = 0
+check = 0
 
 class Welcome( Frame ):
     def __init__( self ):
@@ -45,10 +46,23 @@ class Welcome( Frame ):
 
 
     def new_account(self,name,password):
+        check = 0
         for item in member_list:
             if(name == item ):
                 self.label = Label(self,text = "Account exists", bg = '#00b7ea', font = ("Purisa",7), fg = 'red')
                 self.label.grid(row = 9,column = 1 ,columnspan = 1,sticky = W+E+N+S)
+            if(name != item):
+                check = check + 1
+        if(check == len(member_list)):
+            member_list.append(name)
+            password_list.append(password)
+        print (member_list)
+        print (password_list)
+
+    
+                
+                
+                
         
 
 
