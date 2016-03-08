@@ -6,6 +6,8 @@ from PIL import Image, ImageTk
 modulelist = ["Chinese","OOP","Operating Systems","Data Communications","SFGM","Alorithms"]
 member_list = ['c14356786']
 password_list = ['password']
+language_english = ['Username','Password','New Account','Login','Quit','*Passwords are Case Sensitive']
+language_chinese = ['用户名','密码','新账户','登录','出口','密码区分大小写']
 dropped_module_list = []
 counter = 0
 
