@@ -8,7 +8,7 @@ member_list = ['c14356786']
 password_list = ['password']
 dropped_module_list = []
 counter = 0
-check = 0
+
 User_id = ['holder']
 
 class Welcome( Frame ):
@@ -16,6 +16,7 @@ class Welcome( Frame ):
         tk.Frame.__init__(self)
         self.master.title("Welcome Menu")
         self.configure(background='#00b7ea')
+        self.master.resizable(width = FALSE,height = FALSE)
         self.pack()
         self.make_gui()
         """ logo """
@@ -71,7 +72,7 @@ class Welcome( Frame ):
                     if(password == item):
                         del User_id[0]
                         User_id.append(name)
-                        Main_Menu().mainloop()
+                        Main_Menu()
                     else:
                         print ("Incorrect Password")
                         self.label = Label(self,text ="Incorrect Password/Username" , bg = '#00b7ea',font = ("Purisa",7), fg = 'red')
@@ -90,10 +91,11 @@ class Welcome( Frame ):
 class Main_Menu(Frame):     
     def __init__(self):
         new = Tk()
-        new.title("Webcourses")
+        """new.resizable(width = FALSE,height = FALSE)"""
+        name = User_id[0:1]
+        new.title("Username: " + str(name))
         new.configure(background = '#00b7ea')
         """ Current Modules """
-        name = User_id[0:1]
         listbox = Listbox(new)
         listbox.insert(END)
         for item in modulelist:
@@ -107,14 +109,11 @@ class Main_Menu(Frame):
         listbox_drop.grid( row = 3, column = 1, columnspan = 1, sticky = W+E+N+S )
         """ Entry Box """
         signout_button = Button(new,text = "Sign-Out" )
-        signout_button.grid( row = 1, column = 3, columnspan = 1, sticky = W+E+N+S )
+        signout_button.grid( row = 1, column = 2, columnspan = 1, sticky = W+E+N+S )
         grades_button = Button(new,text = "My Grades" )
         grades_button.grid( row = 1, column = 1, columnspan = 1, sticky = W+E+N+S )
         """ Interface """
-        name_label = Label(new , text = name, bg = '#00b7ea')
-        name_label.grid( row = 1, column = 2, columnspan = 1, sticky = W+E+N+S )
-        print (User_id)
-        
+
 
 
 def main(): 
