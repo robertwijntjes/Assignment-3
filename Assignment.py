@@ -9,6 +9,7 @@ password_list = ['password']
 dropped_module_list = []
 counter = 0
 check = 0
+User_id = ['holder']
 
 class Welcome( Frame ):
     def __init__( self ):
@@ -68,6 +69,8 @@ class Welcome( Frame ):
             if(name == item ):
                 for item in password_list:
                     if(password == item):
+                        del User_id[0]
+                        User_id.append(name)
                         Main_Menu().mainloop()
                     else:
                         print ("Incorrect Password")
@@ -90,9 +93,7 @@ class Main_Menu(Frame):
         new.title("Webcourses")
         new.configure(background = '#00b7ea')
         """ Current Modules """
-        top = len(member_list)
-        name = member_list[0:top]
-        print (name)
+        name = User_id[0:1]
         listbox = Listbox(new)
         listbox.insert(END)
         for item in modulelist:
@@ -112,6 +113,7 @@ class Main_Menu(Frame):
         """ Interface """
         name_label = Label(new , text = name, bg = '#00b7ea')
         name_label.grid( row = 1, column = 2, columnspan = 1, sticky = W+E+N+S )
+        print (User_id)
         
 
 
