@@ -10,6 +10,7 @@ language_english = ['Username','Password','New Account','Login','Quit','*Passwor
 language_chinese = ['用户名','密码','新账户','登录','出口','密码区分大小写']
 dropped_module_list = []
 counter = 0
+check = 0
 
 User_id = ['holder']
 
@@ -117,18 +118,25 @@ class Main_Menu(Frame):
         """ Adding Modules / Delete Modules """
         add_entry = Entry(new)
         add_entry.grid(row = 4, column = 1, columnspan = 1, sticky = W+E+N+S )
-        add_module = Button(new,text = "Add Module" , command = lambda : self.add_modules(add_entry.get(),listbox))
+        add_module = Button(new,text = "Add Module" , command = lambda : self.add_modules(add_entry.get(),listbox ))
         add_module.grid( row = 5, column = 1, columnspan = 1, sticky = W+E+N+S)
-        del_module = Button(new , text = "Delete Module")
+        del_module = Button(new , text = "Delete Module" , command = lambda : self.delete_modules(add_entry.get(),listbox))
         del_module.grid( row = 6, column = 1, columnspan = 1, sticky = W+E+N+S )
         
         
-    def add_modules(new,text,listbox):
-        listbox.insert(0,upper(text))
         
-
-    def delete_module(self):
-        pass
+    def add_modules(new,text,listbox):
+        listbox.insert(0,text)
+        print (modulelist)
+        
+        
+    def delete_modules(self,text,listbox):
+        pos = 0
+        for i in listbox.curselection():
+            idx = int(i) - pos
+            listbox.delete(idx,idx)
+            pos = pos + 1
+        
 
     def close_window(self):
         exit()
