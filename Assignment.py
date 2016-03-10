@@ -9,8 +9,9 @@ password_list = ['password']
 language_english = ['Username','Password','New Account','Login','Quit','*Passwords are Case Sensitive']
 language_chinese = ['用户名','密码','新账户','登录','出口','密码区分大小写']
 dropped_module_list = []
-counter = 0
 check = 0
+lan_count = 1
+lan_bool = True
 
 User_id = ['holder']
 
@@ -25,6 +26,7 @@ class Welcome( Frame ):
         """ logo """
 
     def make_gui(self):
+        counter = 0
         load = Image.open("welcome.jpg")
         render = ImageTk.PhotoImage(load)
         img = Label(self,image = render)
@@ -43,14 +45,32 @@ class Welcome( Frame ):
         self.password.grid( row = 6, column = 2, columnspan = 2, sticky = W+E+N+S )
         self.quitButton = Button(self,text = "Quit", bg = '#FFFFFF' , command = self.quit_button)
         self.quitButton.grid( row = 8, column = 3, columnspan = 1, sticky = W+E+N+S )
-        self.confirmButton = Button(self,text = "Login", bg = '#FFFFFF',command = lambda : self.input_check(self.name.get(),self.password.get()))
+        self.confirmButton = Button(self,text = "Login", bg = '#FFFFFF',command = lambda : self.input_check(self.name.get(),self.password.get(),counter))
         self.confirmButton.grid( row = 8, column = 2, columnspan = 1, sticky = W+E+N+S )
-        self.new_account_button = Button(self, text = "New Account", bg = '#FFFFFF' ,command = lambda : self.new_account(self.name.get(),self.password.get()))
+        self.new_account_button = Button(self, text = "New Account", bg = '#FFFFFF' ,command = lambda : self.new_account(self.name.get(),self.password.get(),counter))
         self.new_account_button.grid( row = 8, column = 0, columnspan = 2, sticky = W+E+N+S )
+        self.lan_button = Button(self,text = "ENG", command = lambda : self.alt_language() )
+        self.lan_button.place(x = 220 , y = 0,height = 25, width = 50)
+        
+    def alt_language(self):
+        global lan_count
+        global lan_bool
+        print (lan_count)
+        print (lan_bool)
+        
+        if(lan_bool):
+             lan_bool = False
+             lan_count +=1
+        else:
+            lan_bool = True
+            lan_count -= 1
+        
+            
+
+
         
 
-
-    def new_account(self,name,password):
+    def new_account(self,name,password,counter):
         check = 0
         for item in member_list:
             if(name == item ):
@@ -67,8 +87,7 @@ class Welcome( Frame ):
     def quit_button(self):
         exit()
 
-    def input_check(self,name,password):
-        counter = 0
+    def input_check(self,name,password,counter):
         for item in member_list:
             if(name == item ):
                 for item in password_list:
@@ -88,6 +107,9 @@ class Welcome( Frame ):
                     self.label.grid( row = 9, column = 2, columnspan = 2, sticky = W+E+N+S )
                 else:
                     counter = counter + 1
+                    
+        
+                    
                 
 
         
@@ -141,9 +163,6 @@ class Main_Menu(Frame):
     def close_window(self):
         exit()
         
-        
-
-
 
 def main(): 
     Welcome().mainloop()
