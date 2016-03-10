@@ -3,7 +3,7 @@ from tkinter import *
 from tkinter import ttk
 from PIL import Image, ImageTk
 
-modulelist = ["Chinese","OOP","Operating Systems","Data Communications","SFGM","Alorithms"]
+modulelist = []
 member_list = ['c14356786']
 password_list = ['password']
 language_english = ['Username','Password','New Account','Login','Quit','*Passwords are Case Sensitive']
@@ -110,11 +110,30 @@ class Main_Menu(Frame):
             listbox_drop.insert(END,item)
         listbox_drop.grid( row = 3, column = 1, columnspan = 1, sticky = W+E+N+S )
         """ Entry Box """
-        signout_button = Button(new,text = "Sign-Out" )
+        signout_button = Button(new,text = "Sign-Out", command = lambda : self.close_window() )
         signout_button.grid( row = 1, column = 2, columnspan = 1, sticky = W+E+N+S )
         grades_button = Button(new,text = "My Grades" )
         grades_button.grid( row = 1, column = 1, columnspan = 1, sticky = W+E+N+S )
-        """ Interface """
+        """ Adding Modules / Delete Modules """
+        add_entry = Entry(new)
+        add_entry.grid(row = 4, column = 1, columnspan = 1, sticky = W+E+N+S )
+        add_module = Button(new,text = "Add Module" , command = lambda : self.add_modules(add_entry.get(),listbox))
+        add_module.grid( row = 5, column = 1, columnspan = 1, sticky = W+E+N+S)
+        del_module = Button(new , text = "Delete Module")
+        del_module.grid( row = 6, column = 1, columnspan = 1, sticky = W+E+N+S )
+        
+        
+    def add_modules(new,text,listbox):
+        listbox.insert(0,upper(text))
+        
+
+    def delete_module(self):
+        pass
+
+    def close_window(self):
+        exit()
+        
+        
 
 
 
