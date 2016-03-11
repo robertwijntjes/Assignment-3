@@ -10,7 +10,6 @@ language_english = ['Username','Password','New Account','Login','Quit','*Passwor
 language_chinese = ['用户名','密码','新账户','登录','出口','密码区分大小写']
 dropped_module_list = []
 check = 0
-lan_count = 1
 lan_bool = True
 
 User_id = ['holder']
@@ -27,6 +26,12 @@ class Welcome( Frame ):
 
     def make_gui(self):
         counter = 0
+        n_account = tk.StringVar()
+        user_a = tk.StringVar()
+        pass_a = tk.StringVar()
+        login_a = tk.StringVar()
+        quit_a = tk.StringVar()
+        case_a = tk.StringVar()
         load = Image.open("welcome.jpg")
         render = ImageTk.PhotoImage(load)
         img = Label(self,image = render)
@@ -47,23 +52,39 @@ class Welcome( Frame ):
         self.quitButton.grid( row = 8, column = 3, columnspan = 1, sticky = W+E+N+S )
         self.confirmButton = Button(self,text = "Login", bg = '#FFFFFF',command = lambda : self.input_check(self.name.get(),self.password.get(),counter))
         self.confirmButton.grid( row = 8, column = 2, columnspan = 1, sticky = W+E+N+S )
-        self.new_account_button = Button(self, text = "New Account", bg = '#FFFFFF' ,command = lambda : self.new_account(self.name.get(),self.password.get(),counter))
+        self.new_account_button = Button(self, textvariable = n_account, bg = '#FFFFFF' ,command = lambda : self.new_account(self.name.get(),self.password.get(),counter ))
         self.new_account_button.grid( row = 8, column = 0, columnspan = 2, sticky = W+E+N+S )
-        self.lan_button = Button(self,text = "ENG", command = lambda : self.alt_language() )
+        self.lan_button = Button(self,text = "ENG", command = lambda : self.alt_language(case_a,quit_a,login_a,pass_a,user_a,n_account) )
         self.lan_button.place(x = 220 , y = 0,height = 25, width = 50)
+        n_account.set(language_english[0])
+        case_a.set(language_english[5])
+        quit_a.set(language_english[4])
+        login_a.set(language_english[3])
+        pass_a.set(language_english[1])
+        user_a.set(language_english[2])
         
-    def alt_language(self):
-        global lan_count
+    def alt_language(self,case_a,quit_a,login_a,pass_a,user_a,n_account):
+        
         global lan_bool
-        print (lan_count)
         print (lan_bool)
-        
         if(lan_bool):
+             n_account.set(language_chinese[0])
+             case_a.set(language_chinese[0])
+             quit_a.set(language_chinese[0])
+             login_a.set(language_chinese[0])
+             pass_a.set(language_chinese[0])
+             user_a.set(language_chinese[0])
              lan_bool = False
-             lan_count +=1
-        else:
+        else: 
+            n_account.set(language_english[0])
+            case_a.set(language_english[0])
+            quit_a.set(language_english[0])
+            login_a.set(language_english[0])
+            pass_a.set(language_english[0])
+            user_a.set(language_english[0])
             lan_bool = True
-            lan_count -= 1
+
+        
         
             
 
@@ -85,7 +106,7 @@ class Welcome( Frame ):
         print (password_list)         
 
     def quit_button(self):
-        exit()
+        quit()
 
     def input_check(self,name,password,counter):
         for item in member_list:
@@ -161,7 +182,7 @@ class Main_Menu(Frame):
         
 
     def close_window(self):
-        exit()
+        quit()
         
 
 def main(): 
