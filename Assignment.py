@@ -6,8 +6,8 @@ from PIL import Image, ImageTk
 modulelist = []
 member_list = ['c14356786']
 password_list = ['password']
-language_english = ['Username','Password','New Account','Login','Quit','*Passwords are Case Sensitive']
-language_chinese = ['用户名','密码','新账户','登录','出口','密码区分大小写']
+language_english = ['Username','Password','New Account','Login','Quit','*Passwords are Case Sensitive','CN']
+language_chinese = ['用户名','密码','新账户','登录','出口','密码区分大小写','英文']
 dropped_module_list = []
 check = 0
 lan_bool = True
@@ -32,30 +32,32 @@ class Welcome( Frame ):
         login_a = tk.StringVar()
         quit_a = tk.StringVar()
         case_a = tk.StringVar()
+        toggle_a = tk.StringVar()
         load = Image.open("welcome.jpg")
         render = ImageTk.PhotoImage(load)
         img = Label(self,image = render)
         img.image = render
         img.grid( row = 0, column = 0, columnspan = 2, sticky = W+E+N+S )
         """ Details """
-        self.n_label = Label(self,text = "Username", bg = '#00b7ea')
+        self.n_label = Label(self,textvariable = user_a, bg = '#00b7ea')
         self.n_label.grid( row = 5, column = 0, columnspan = 2, sticky = W+E+N+S )
-        self.p_label = Label(self,text = "Password", bg = '#00b7ea')
+        self.p_label = Label(self,textvariable = pass_a, bg = '#00b7ea')
         self.p_label.grid( row = 6, column = 0, columnspan = 2, sticky = W+E+N+S )
-        self.cs_label = Label(self,text = "*Passwords are Case Sensitive",font = ("Purisa",7), bg = '#00b7ea')
+        self.cs_label = Label(self,textvariable = case_a,font = ("Purisa",7), bg = '#00b7ea')
         self.cs_label.grid( row = 7, column = 2, columnspan = 2, sticky = W+E+N+S )
         self.name = Entry(self)
         self.name.grid( row = 5, column = 2, columnspan = 2, sticky = W+E+N+S )
         self.password = Entry(self,show = "*")
         self.password.grid( row = 6, column = 2, columnspan = 2, sticky = W+E+N+S )
-        self.quitButton = Button(self,text = "Quit", bg = '#FFFFFF' , command = self.quit_button)
+        self.quitButton = Button(self,textvariable = quit_a, bg = '#FFFFFF' , command = self.quit_button)
         self.quitButton.grid( row = 8, column = 3, columnspan = 1, sticky = W+E+N+S )
-        self.confirmButton = Button(self,text = "Login", bg = '#FFFFFF',command = lambda : self.input_check(self.name.get(),self.password.get(),counter))
+        self.confirmButton = Button(self,textvariable = login_a, bg = '#FFFFFF',command = lambda : self.input_check(self.name.get(),self.password.get(),counter))
         self.confirmButton.grid( row = 8, column = 2, columnspan = 1, sticky = W+E+N+S )
         self.new_account_button = Button(self, textvariable = n_account, bg = '#FFFFFF' ,command = lambda : self.new_account(self.name.get(),self.password.get(),counter ))
         self.new_account_button.grid( row = 8, column = 0, columnspan = 2, sticky = W+E+N+S )
-        self.lan_button = Button(self,text = "ENG", command = lambda : self.alt_language(case_a,quit_a,login_a,pass_a,user_a,n_account) )
-        self.lan_button.place(x = 220 , y = 0,height = 25, width = 50)
+        self.lan_button = Button(self,textvariable = toggle_a, command = lambda : self.alt_language(case_a,quit_a,login_a,pass_a,user_a,n_account,toggle_a) )
+        self.lan_button.place(x = 215 , y = 0,height = 25, width = 50)
+        toggle_a.set(language_english[6])
         n_account.set(language_english[0])
         case_a.set(language_english[5])
         quit_a.set(language_english[4])
@@ -63,25 +65,27 @@ class Welcome( Frame ):
         pass_a.set(language_english[1])
         user_a.set(language_english[2])
         
-    def alt_language(self,case_a,quit_a,login_a,pass_a,user_a,n_account):
+    def alt_language(self,case_a,quit_a,login_a,pass_a,user_a,n_account,toggle_a):
         
         global lan_bool
         print (lan_bool)
         if(lan_bool):
              n_account.set(language_chinese[0])
-             case_a.set(language_chinese[0])
-             quit_a.set(language_chinese[0])
-             login_a.set(language_chinese[0])
-             pass_a.set(language_chinese[0])
-             user_a.set(language_chinese[0])
+             case_a.set(language_chinese[5])
+             quit_a.set(language_chinese[4])
+             login_a.set(language_chinese[3])
+             pass_a.set(language_chinese[1])
+             user_a.set(language_chinese[2])
+             toggle_a.set(language_chinese[6])
              lan_bool = False
         else: 
             n_account.set(language_english[0])
-            case_a.set(language_english[0])
-            quit_a.set(language_english[0])
-            login_a.set(language_english[0])
-            pass_a.set(language_english[0])
-            user_a.set(language_english[0])
+            case_a.set(language_english[5])
+            quit_a.set(language_english[4])
+            login_a.set(language_english[3])
+            pass_a.set(language_english[1])
+            user_a.set(language_english[2])
+            toggle_a.set(language_english[6])
             lan_bool = True
 
         
