@@ -2,6 +2,7 @@ import tkinter as tk
 from tkinter import *
 from tkinter import ttk
 from PIL import Image, ImageTk
+import datetime
 
 modulelist = []
 member_list = ['c14356786']
@@ -11,8 +12,6 @@ language_chinese = ['用户名','密码','新账户','登录','出口','密码�
 dropped_module_list = []
 check = 0
 lan_bool = True
-
-
 User_id = ['holder']
 
 class Welcome( Frame ):
@@ -59,12 +58,12 @@ class Welcome( Frame ):
         self.lan_button = Button(self,textvariable = toggle_a, command = lambda : self.alt_language(case_a,quit_a,login_a,pass_a,user_a,n_account,toggle_a) )
         self.lan_button.place(x = 200 , y = 0,height = 25, width = 50)
         toggle_a.set(language_english[6])
-        n_account.set(language_english[0])
+        n_account.set(language_english[2])
         case_a.set(language_english[5])
         quit_a.set(language_english[4])
         login_a.set(language_english[3])
         pass_a.set(language_english[1])
-        user_a.set(language_english[2])
+        user_a.set(language_english[0])
         
     def alt_language(self,case_a,quit_a,login_a,pass_a,user_a,n_account,toggle_a):
         
@@ -80,12 +79,12 @@ class Welcome( Frame ):
              toggle_a.set(language_chinese[6])
              lan_bool = False
         else: 
-            n_account.set(language_english[0])
+            n_account.set(language_english[2])
             case_a.set(language_english[5])
             quit_a.set(language_english[4])
             login_a.set(language_english[3])
             pass_a.set(language_english[1])
-            user_a.set(language_english[2])
+            user_a.set(language_english[0])
             toggle_a.set(language_english[6])
             lan_bool = True
   
@@ -170,11 +169,13 @@ class Main_Menu(Frame):
         del_reminder.grid( row = 8, column = 1, columnspan = 1, sticky = W+E+N+S )
         
     def add_reminder(new,text,listbox):
-        listbox.insert(0,text)
+        utc_datetime = datetime.datetime.utcnow()
+        formated_string = utc_datetime.strftime("%Y-%m-%d")
+        listbox.insert(0,formated_string + "| " + text )
         
     def add_modules(new,text,listbox):
         listbox.insert(0,text)
-        print (modulelist)
+        
         
     def delete_reminder(new,text,listbox):
         pos = 0
