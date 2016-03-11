@@ -12,6 +12,7 @@ dropped_module_list = []
 check = 0
 lan_bool = True
 
+
 User_id = ['holder']
 
 class Welcome( Frame ):
@@ -56,7 +57,7 @@ class Welcome( Frame ):
         self.new_account_button = Button(self, textvariable = n_account, bg = '#FFFFFF' ,command = lambda : self.new_account(self.name.get(),self.password.get(),counter ))
         self.new_account_button.grid( row = 8, column = 0, columnspan = 2, sticky = W+E+N+S )
         self.lan_button = Button(self,textvariable = toggle_a, command = lambda : self.alt_language(case_a,quit_a,login_a,pass_a,user_a,n_account,toggle_a) )
-        self.lan_button.place(x = 215 , y = 0,height = 25, width = 50)
+        self.lan_button.place(x = 200 , y = 0,height = 25, width = 50)
         toggle_a.set(language_english[6])
         n_account.set(language_english[0])
         case_a.set(language_english[5])
@@ -87,13 +88,7 @@ class Welcome( Frame ):
             user_a.set(language_english[2])
             toggle_a.set(language_english[6])
             lan_bool = True
-
-        
-        
-            
-
-
-        
+  
 
     def new_account(self,name,password,counter):
         check = 0
@@ -169,14 +164,25 @@ class Main_Menu(Frame):
         add_module.grid( row = 5, column = 1, columnspan = 1, sticky = W+E+N+S)
         del_module = Button(new , text = "Delete Module" , command = lambda : self.delete_modules(add_entry.get(),listbox))
         del_module.grid( row = 6, column = 1, columnspan = 1, sticky = W+E+N+S )
+        add_reminder = Button(new , text = "Add Reminder", command = lambda : self.add_reminder(add_entry.get(),listbox_drop ))
+        add_reminder.grid( row = 7, column = 1, columnspan = 1, sticky = W+E+N+S )
+        del_reminder = Button(new , text = "Delete Reminder" , command = lambda : self.delete_reminder(add_entry.get(),listbox_drop))
+        del_reminder.grid( row = 8, column = 1, columnspan = 1, sticky = W+E+N+S )
         
-        
+    def add_reminder(new,text,listbox):
+        listbox.insert(0,text)
         
     def add_modules(new,text,listbox):
         listbox.insert(0,text)
         print (modulelist)
         
-        
+    def delete_reminder(new,text,listbox):
+        pos = 0
+        for i in listbox.curselection():
+            idx = int(i) - pos
+            listbox.delete(idx,idx)
+            pos = pos + 1
+            
     def delete_modules(self,text,listbox):
         pos = 0
         for i in listbox.curselection():
