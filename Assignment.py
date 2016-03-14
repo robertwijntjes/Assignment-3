@@ -7,11 +7,12 @@ import datetime
 modulelist = []
 member_list = ['c14356786']
 password_list = ['password']
-language_english = ['Username','Password','New Account','Login','Quit','*Passwords are Case Sensitive','CN']
-language_chinese = ['用户名','密码','新账户','登录','出口','密码区分大小写','英文']
+language_english = ['Username','Password','New Account','Login','Quit','*Passwords are Case Sensitive','CN','Add Module', 'Remove Module','Add Reminder', 'Remove Reminder','My Grades']
+language_chinese = ['用户名','密码','新账户','登录','出口','密码区分大小写','英文','加课' , '未追加课' ，' 加便条  ' ，'未追加便条', '我的成绩' ]
 dropped_module_list = []
 check = 0
 lan_bool = True
+lan_boola = True
 User_id = ['holder']
 
 class Welcome( Frame ):
@@ -135,6 +136,13 @@ class Welcome( Frame ):
 class Main_Menu(Frame):     
     def __init__(self):
         new = Tk()
+        signouta = tk.StringVar()
+        my_gradesa = tk.StringVar()
+        add_modulea = tk.StringVar()
+        remove_modulea = tk.StringVar()
+        add_remindera = tk.StringVar()
+        remove_remindera = tk.StringVar()
+        cn_a = tk.StringVar()
         """new.resizable(width = FALSE,height = FALSE)"""
         name = User_id[0:1]
         new.title("Username: " + str(name))
@@ -144,16 +152,16 @@ class Main_Menu(Frame):
         listbox.insert(END)
         for item in modulelist:
             listbox.insert(END,item)
-        listbox.grid( row = 2, column = 1, columnspan = 1, sticky = W+E+N+S )
+        listbox.grid( row = 2, column = 1, columnspan = 2, sticky = W+E+N+S )
         lb = Listbox(new)
         """ Dropped Modules """
         listbox_drop = Listbox(new)
         for item in dropped_module_list:
             listbox_drop.insert(END,item)
-        listbox_drop.grid( row = 3, column = 1, columnspan = 1, sticky = W+E+N+S )
+        listbox_drop.grid( row = 3, column = 1, columnspan = 2, sticky = W+E+N+S )
         """ Entry Box """
         signout_button = Button(new,text = "Sign-Out", command = lambda : self.close_window() )
-        signout_button.grid( row = 1, column = 2, columnspan = 1, sticky = W+E+N+S )
+        signout_button.grid( row = 1, column = 3, columnspan = 1, sticky = W+E+N+S )
         grades_button = Button(new,text = "My Grades" )
         grades_button.grid( row = 1, column = 1, columnspan = 1, sticky = W+E+N+S )
         """ Adding Modules / Delete Modules """
@@ -167,6 +175,22 @@ class Main_Menu(Frame):
         add_reminder.grid( row = 7, column = 1, columnspan = 1, sticky = W+E+N+S )
         del_reminder = Button(new , text = "Delete Reminder" , command = lambda : self.delete_reminder(add_entry.get(),listbox_drop))
         del_reminder.grid( row = 8, column = 1, columnspan = 1, sticky = W+E+N+S )
+        alt_language = Button(new , text = "CN" )
+        alt_language.grid( row = 1 , column = 2 , columnspan = 1 , sticky = W+E+N+S )
+        signouta = tk.StringVar()
+        my_gradesa = tk.StringVar()
+        add_modulea = tk.StringVar()
+        remove_modulea = tk.StringVar()
+        add_remindera = tk.StringVar()
+        remove_remindera = tk.StringVar()
+
+    def alt_languagea(new):
+        global lan_boola
+        if(lan_boola)
+            lan_boola = False
+        else:
+            lan_boola = True
+        
         
     def add_reminder(new,text,listbox):
         utc_datetime = datetime.datetime.utcnow()
