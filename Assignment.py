@@ -8,7 +8,7 @@ modulelist = []
 member_list = ['c14356786']
 password_list = ['password']
 language_english = ['Username','Password','New Account','Login','Quit','*Passwords are Case Sensitive','CN','Add Module', 'Remove Module','Add Reminder', 'Remove Reminder','My Grades']
-language_chinese = ['用户名','密码','新账户','登录','出口','密码区分大小写','英文','加课' , '未追加课' ，' 加便条  ' ，'未追加便条', '我的成绩' ]
+language_chinese = ['用户名','密码','新账户','登录','退出','密码区分大小写','英文','添加课程' , '删除课程',' 添加便条  ' ,'删除提醒', '成绩' ]
 dropped_module_list = []
 check = 0
 lan_bool = True
@@ -69,7 +69,6 @@ class Welcome( Frame ):
     def alt_language(self,case_a,quit_a,login_a,pass_a,user_a,n_account,toggle_a):
         
         global lan_bool
-        print (lan_bool)
         if(lan_bool):
              n_account.set(language_chinese[0])
              case_a.set(language_chinese[5])
@@ -136,13 +135,7 @@ class Welcome( Frame ):
 class Main_Menu(Frame):     
     def __init__(self):
         new = Tk()
-        signouta = tk.StringVar()
-        my_gradesa = tk.StringVar()
-        add_modulea = tk.StringVar()
-        remove_modulea = tk.StringVar()
-        add_remindera = tk.StringVar()
-        remove_remindera = tk.StringVar()
-        cn_a = tk.StringVar()
+        cn_a = language_english[1]
         """new.resizable(width = FALSE,height = FALSE)"""
         name = User_id[0:1]
         new.title("Username: " + str(name))
@@ -173,24 +166,20 @@ class Main_Menu(Frame):
         del_module.grid( row = 6, column = 1, columnspan = 1, sticky = W+E+N+S )
         add_reminder = Button(new , text = "Add Reminder", command = lambda : self.add_reminder(add_entry.get(),listbox_drop ))
         add_reminder.grid( row = 7, column = 1, columnspan = 1, sticky = W+E+N+S )
-        del_reminder = Button(new , text = "Delete Reminder" , command = lambda : self.delete_reminder(add_entry.get(),listbox_drop))
+        del_reminder = Button(new , text = "Delete Reminder", command = lambda : self.delete_reminder(add_entry.get(),listbox_drop))
         del_reminder.grid( row = 8, column = 1, columnspan = 1, sticky = W+E+N+S )
-        alt_language = Button(new , text = "CN" )
-        alt_language.grid( row = 1 , column = 2 , columnspan = 1 , sticky = W+E+N+S )
-        signouta = tk.StringVar()
-        my_gradesa = tk.StringVar()
-        add_modulea = tk.StringVar()
-        remove_modulea = tk.StringVar()
-        add_remindera = tk.StringVar()
-        remove_remindera = tk.StringVar()
+        alt_language = Button( new , text = cn_a , command = lambda : self.alt_lan(alt_language))
+        alt_language.grid(row = 1 , column = 4 , columnspan = 1, sticky = W+E+N+S)
 
-    def alt_languagea(new):
+    def alt_lan(self,add_module):
         global lan_boola
-        if(lan_boola)
+        print (lan_boola)
+        if(lan_boola):
+            add_module.configure(text = "cheese")
             lan_boola = False
         else:
+            add_module.configure(text = "CN")
             lan_boola = True
-        
         
     def add_reminder(new,text,listbox):
         utc_datetime = datetime.datetime.utcnow()
