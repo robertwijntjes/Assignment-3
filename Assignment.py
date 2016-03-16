@@ -168,17 +168,29 @@ class Main_Menu(Frame):
         add_reminder.grid( row = 7, column = 1, columnspan = 1, sticky = W+E+N+S )
         del_reminder = Button(new , text = "Delete Reminder", command = lambda : self.delete_reminder(add_entry.get(),listbox_drop))
         del_reminder.grid( row = 8, column = 1, columnspan = 1, sticky = W+E+N+S )
-        alt_language = Button( new , text = cn_a , command = lambda : self.alt_lan(alt_language))
+        alt_language = Button( new , text = cn_a , command = lambda : self.alt_lan(alt_language,signout_button,grades_button,add_module,del_module,add_reminder,del_reminder))
         alt_language.grid(row = 1 , column = 4 , columnspan = 1, sticky = W+E+N+S)
 
-    def alt_lan(self,add_module):
+    def alt_lan(self,alt_language,signout_button,grades_button,add_module,del_module,add_reminder,del_reminder):
         global lan_boola
         print (lan_boola)
         if(lan_boola):
-            add_module.configure(text = "cheese")
+            add_module.configure(text = language_english[7])
+            alt_language.configure(text = language_english[6])
+            signout_button.configure(text = language_english[4])
+            grades_button.configure(text = language_english[11])
+            del_module.configure(text = language_english[0])
+            add_reminder.configure(text = language_english[0])
+            del_reminder.configure(text = language_english[0])
             lan_boola = False
         else:
-            add_module.configure(text = "CN")
+            add_module.configure(text = language_chinese[7] )
+            alt_language.configure(text = language_chinese[6])
+            signout_button.configure(text = language_chinese[4])
+            grades_button.configure(text = language_chinese[11])
+            del_module.configure(text = language_chinese[0])
+            add_reminder.configure(text = language_chinese[0])
+            del_reminder.configure(text = language_chinese[0])
             lan_boola = True
         
     def add_reminder(new,text,listbox):
