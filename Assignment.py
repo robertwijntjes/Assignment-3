@@ -137,7 +137,7 @@ class Welcome( Frame ):
 class Main_Menu(Frame):     
     def __init__(self):
         new = Tk()
-        """new.resizable(width = FALSE,height = FALSE)"""
+        new.resizable(width = FALSE,height = FALSE)
         name = User_id[0:1]
         new.title("Username: " + str(name))
         new.configure(background = '#00b7ea')
@@ -172,7 +172,7 @@ class Main_Menu(Frame):
         alt_language = Button( new  ,text = "CN" ,command = lambda : self.alt_lan(alt_language,signout_button,grades_button,add_module,del_module,add_reminder,del_reminder))
         alt_language.grid(row = 1 , column = 1 , columnspan = 2, sticky = W+E+N+S)
         description_box = Text(new)
-        description_box.place(x = 100 , y = 100,height = 100,width = 200)
+        description_box.place(x = 125 , y = 27,height = 350,width = 125)
 
     def alt_lan(self,alt_language,signout_button,grades_button,add_module,del_module,add_reminder,del_reminder):
         global lan_boola
