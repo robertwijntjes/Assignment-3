@@ -4,11 +4,13 @@ from tkinter import ttk
 from PIL import Image, ImageTk
 import datetime
 
-modulelist = []
+modulelist = ['OOP']
+database_mod = {
+    'OOP': 'Object-oriented programming (OOP) refers to a type of computer programming (software design) in which programmers define not only the data type of a data structure, but also the types of operations (functions) that can be applied to the data structure.'}
 member_list = ['c14356786']
 password_list = ['password']
 language_english = ['Username','Password','New Account','Login','Quit','*Passwords are Case Sensitive','CN','Add Module', 'Remove Module','Add Reminder', 'Remove Reminder','My Grades']
-language_chinese = ['用户名','密码','新账户','登录','退出','密码区分大小写','英文','添加课程' , '删除课程',' 添加便条  ' ,'删除提醒', '成绩' ]
+language_chinese = ['用户名','密码','新账户','登录','退出','密码区分大小写','英文','添加课程' , '删除课程',' 添加便条  ' ,'删除提醒', '      成绩     ' ]
 dropped_module_list = []
 check = 0
 lan_bool = True
@@ -135,7 +137,6 @@ class Welcome( Frame ):
 class Main_Menu(Frame):     
     def __init__(self):
         new = Tk()
-        cn_a = language_english[1]
         """new.resizable(width = FALSE,height = FALSE)"""
         name = User_id[0:1]
         new.title("Username: " + str(name))
@@ -154,9 +155,9 @@ class Main_Menu(Frame):
         listbox_drop.grid( row = 3, column = 1, columnspan = 2, sticky = W+E+N+S )
         """ Entry Box """
         signout_button = Button(new,text = "Sign-Out", command = lambda : self.close_window() )
-        signout_button.grid( row = 1, column = 3, columnspan = 1, sticky = W+E+N+S )
+        signout_button.grid( row = 1, column = 6, columnspan = 1, sticky = W+E+N+S )
         grades_button = Button(new,text = "My Grades" )
-        grades_button.grid( row = 1, column = 1, columnspan = 1, sticky = W+E+N+S )
+        grades_button.grid( row = 1, column = 4, columnspan = 1, sticky = W+E+N+S )
         """ Adding Modules / Delete Modules """
         add_entry = Entry(new)
         add_entry.grid(row = 4, column = 1, columnspan = 1, sticky = W+E+N+S )
@@ -168,29 +169,31 @@ class Main_Menu(Frame):
         add_reminder.grid( row = 7, column = 1, columnspan = 1, sticky = W+E+N+S )
         del_reminder = Button(new , text = "Delete Reminder", command = lambda : self.delete_reminder(add_entry.get(),listbox_drop))
         del_reminder.grid( row = 8, column = 1, columnspan = 1, sticky = W+E+N+S )
-        alt_language = Button( new , text = cn_a , command = lambda : self.alt_lan(alt_language,signout_button,grades_button,add_module,del_module,add_reminder,del_reminder))
-        alt_language.grid(row = 1 , column = 4 , columnspan = 1, sticky = W+E+N+S)
+        alt_language = Button( new  ,text = "CN" ,command = lambda : self.alt_lan(alt_language,signout_button,grades_button,add_module,del_module,add_reminder,del_reminder))
+        alt_language.grid(row = 1 , column = 1 , columnspan = 2, sticky = W+E+N+S)
+        description_box = Text(new)
+        description_box.place(x = 100 , y = 100,height = 100,width = 200)
 
     def alt_lan(self,alt_language,signout_button,grades_button,add_module,del_module,add_reminder,del_reminder):
         global lan_boola
         print (lan_boola)
         if(lan_boola):
-            add_module.configure(text = language_english[7])
-            alt_language.configure(text = language_english[6])
-            signout_button.configure(text = language_english[4])
-            grades_button.configure(text = language_english[11])
-            del_module.configure(text = language_english[0])
-            add_reminder.configure(text = language_english[0])
-            del_reminder.configure(text = language_english[0])
-            lan_boola = False
-        else:
             add_module.configure(text = language_chinese[7] )
             alt_language.configure(text = language_chinese[6])
             signout_button.configure(text = language_chinese[4])
             grades_button.configure(text = language_chinese[11])
-            del_module.configure(text = language_chinese[0])
-            add_reminder.configure(text = language_chinese[0])
-            del_reminder.configure(text = language_chinese[0])
+            del_module.configure(text = language_chinese[8])
+            add_reminder.configure(text = language_chinese[9])
+            del_reminder.configure(text = language_chinese[10])
+            lan_boola = False
+        else:
+            add_module.configure(text = language_english[7])
+            alt_language.configure(text = language_english[6])
+            signout_button.configure(text = language_english[4])
+            grades_button.configure(text = language_english[11])
+            del_module.configure(text = language_english[8])
+            add_reminder.configure(text = language_english[9])
+            del_reminder.configure(text = language_english[10])
             lan_boola = True
         
     def add_reminder(new,text,listbox):
