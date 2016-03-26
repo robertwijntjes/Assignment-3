@@ -9,7 +9,7 @@ database_mod = {
     'OOP': 'Object-oriented programming (OOP) refers to a type of computer programming (software design) in which programmers define not only the data type of a data structure, but also the types of operations (functions) that can be applied to the data structure.'}
 member_list = ['c14356786']
 password_list = ['password']
-language_english = ['Username','Password','New Account','Login','Quit','*Passwords are Case Sensitive','CN','Add Module', 'Remove Module','Add Reminder', 'Remove Reminder','My Grades']
+language_english = ['Username','Password','New Account','Login','Sign-Out','*Passwords are Case Sensitive','CN','Add Module', 'Remove Module','Add Reminder', 'Remove Reminder','My Grades']
 language_chinese = ['用户名','密码','新账户','登录','退出','密码区分大小写','英文','添加课程' , '删除课程',' 添加便条  ' ,'删除提醒', '      成绩     ' ]
 dropped_module_list = []
 check = 0
@@ -175,10 +175,14 @@ class Main_Menu(Frame):
         description_box.place(x = 125 , y = 27,height = 350,width = 125)
 
     def OnDouble(self, event):
+        count = 0
         widget = event.widget
         selection=widget.curselection()
         value = widget.get(selection[0])
-        print (5)
+        for i in widget.curselection():
+            for j in database_mod.keys():
+                if(j == modulelist[i]):
+                    print (database_mod[j])
         
         
 
@@ -238,3 +242,4 @@ def main():
 
 if __name__ == '__main__':
     main()
+    
