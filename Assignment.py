@@ -146,8 +146,8 @@ class Main_Menu(Frame):
         listbox.insert(END)
         for item in modulelist:
             listbox.insert(END,item)
+        listbox.bind("<Double-Button-1>", self.OnDouble )
         listbox.grid( row = 2, column = 1, columnspan = 2, sticky = W+E+N+S )
-        lb = Listbox(new)
         """ Dropped Modules """
         listbox_drop = Listbox(new)
         for item in dropped_module_list:
@@ -174,11 +174,20 @@ class Main_Menu(Frame):
         description_box = Text(new)
         description_box.place(x = 125 , y = 27,height = 350,width = 125)
 
+    def OnDouble(self, event):
+        widget = event.widget
+        selection=widget.curselection()
+        value = widget.get(selection[0])
+        print (5)
+        
+        
+
+
     def alt_lan(self,alt_language,signout_button,grades_button,add_module,del_module,add_reminder,del_reminder):
         global lan_boola
         print (lan_boola)
         if(lan_boola):
-            add_module.configure(text = language_chinese[7] )
+            add_module.configure(text = language_chinese[7])
             alt_language.configure(text = language_chinese[6])
             signout_button.configure(text = language_chinese[4])
             grades_button.configure(text = language_chinese[11])
