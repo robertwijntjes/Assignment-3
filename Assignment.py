@@ -12,10 +12,12 @@ password_list = ['password']
 language_english = ['Username','Password','New Account','Login','Sign-Out','*Passwords are Case Sensitive','CN','Add Module', 'Remove Module','Add Reminder', 'Remove Reminder','My Grades']
 language_chinese = ['用户名','密码','新账户','登录','退出','密码区分大小写','英文','添加课程' , '删除课程',' 添加便条  ' ,'删除提醒', '      成绩     ' ]
 dropped_module_list = []
+check_count = [0]
 check = 0
 lan_bool = True
 lan_boola = True
 User_id = ['holder']
+count = 0
 
 class Welcome( Frame ):
     def __init__( self ):
@@ -141,12 +143,15 @@ class Main_Menu(Frame):
         name = User_id[0:1]
         new.title("Username: " + str(name))
         new.configure(background = '#00b7ea')
+        """Module Descriptions"""
+        description_box = Text(new)
+        description_box.place(x = 125 , y = 27,height = 350,width = 125)
         """ Current Modules """
         listbox = Listbox(new)
         listbox.insert(END)
         for item in modulelist:
             listbox.insert(END,item)
-        listbox.bind("<Double-Button-1>", self.OnDouble )
+        listbox.bind("<Double-Button-1>", lambda event : self.OnDouble(event,description_box ))
         listbox.grid( row = 2, column = 1, columnspan = 2, sticky = W+E+N+S )
         """ Dropped Modules """
         listbox_drop = Listbox(new)
@@ -171,20 +176,24 @@ class Main_Menu(Frame):
         del_reminder.grid( row = 8, column = 1, columnspan = 1, sticky = W+E+N+S )
         alt_language = Button( new  ,text = "CN" ,command = lambda : self.alt_lan(alt_language,signout_button,grades_button,add_module,del_module,add_reminder,del_reminder))
         alt_language.grid(row = 1 , column = 1 , columnspan = 2, sticky = W+E+N+S)
-        description_box = Text(new)
-        description_box.place(x = 125 , y = 27,height = 350,width = 125)
 
-    def OnDouble(self, event):
-        count = 0
+    def OnDouble( self, event , box ):
+        global count
         widget = event.widget
         selection=widget.curselection()
         value = widget.get(selection[0])
         for i in widget.curselection():
             for j in database_mod.keys():
                 if(j == modulelist[i]):
-                    print (database_mod[j])
-        
-        
+                    box.insert( END,database_mod[j] )
+                    count = count + 1
+                    print (count)
+        if(count > 1):
+            box.delete( '1.0' , END )
+            box.insert( END,database_mod[j] )
+        count = 0
+                    
+ 
 
 
     def alt_lan(self,alt_language,signout_button,grades_button,add_module,del_module,add_reminder,del_reminder):
@@ -216,7 +225,8 @@ class Main_Menu(Frame):
         
     def add_modules(new,text,listbox):
         listbox.insert(0,text)
-        
+        modulelist.append(text)
+        print (modulelist)
         
     def delete_reminder(new,text,listbox):
         pos = 0
@@ -231,6 +241,7 @@ class Main_Menu(Frame):
             idx = int(i) - pos
             listbox.delete(idx,idx)
             pos = pos + 1
+        del modulelist[i]
         
 
     def close_window(self):
