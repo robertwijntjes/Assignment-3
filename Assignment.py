@@ -183,15 +183,13 @@ class Main_Menu(Frame):
         selection=widget.curselection()
         value = widget.get(selection[0])
         for i in widget.curselection():
-            for j in database_mod.keys():
-                if(j == modulelist[i]):
-                    box.insert( END,database_mod[j] )
-                    count = count + 1
-                    print (count)
-        if(count > 1):
-            box.delete( '1.0' , END )
-            box.insert( END,database_mod[j] )
-        count = 0
+            for i in database_mod.keys():
+                if(i == value):
+                    box.delete( '1.0' , END )
+                    box.insert( END , database_mod[i] )
+                else:
+                    box.delete( '1.0' , END )
+                    
                     
  
 
