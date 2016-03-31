@@ -6,7 +6,7 @@ import datetime
 
 modulelist = ['OOP']
 database_mod = {
-    'OOP': 'Object-oriented programming (OOP) refers to a type of computer programming (software design) in which programmers define not only the data type of a data structure, but also the types of operations (functions) that can be applied to the data structure.'}
+    'OOP': 'Object-oriented programming (OOP) refers to a type of computer programming (software design) in which programmers define not only the data type of a data structure, but also the types of operations (functions) that can be applied to the data structure.', 'SFGM' : 'BLOOP' }
 member_list = ['c14356786']
 password_list = ['password']
 language_english = ['Username','Password','New Account','Login','Sign-Out','*Passwords are Case Sensitive','CN','Add Module', 'Remove Module','Add Reminder', 'Remove Reminder','My Grades']
@@ -45,7 +45,8 @@ class Welcome( Frame ):
         img.grid( row = 0, column = 0, columnspan = 2, sticky = W+E+N+S )
         """ Details """
         self.n_label = Label(self,textvariable = user_a, bg = '#00b7ea')
-        self.n_label.grid( row = 5, column = 0, columnspan = 2, sticky = W+E+N+S )
+        self.n_label.grid(
+            row = 5, column = 0, columnspan = 2, sticky = W+E+N+S )
         self.p_label = Label(self,textvariable = pass_a, bg = '#00b7ea')
         self.p_label.grid( row = 6, column = 0, columnspan = 2, sticky = W+E+N+S )
         self.cs_label = Label(self,textvariable = case_a,font = ("Purisa",7), bg = '#00b7ea')
@@ -187,6 +188,7 @@ class Main_Menu(Frame):
                 if(i == value):
                     box.delete( '1.0' , END )
                     box.insert( END , database_mod[i] )
+                    break
                 else:
                     box.delete( '1.0' , END )
                     
