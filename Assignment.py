@@ -100,6 +100,7 @@ class Welcome( Frame ):
             if(name == item ):
                 self.label = Label(self,text = "Account exists", bg = '#00b7ea', font = ("Purisa",7), fg = 'red')
                 self.label.grid(row = 9,column = 1 ,columnspan = 1,sticky = W+E+N+S)
+                break
             if(name != item):
                 check = check + 1
         if(check == len(member_list)):
@@ -119,6 +120,9 @@ class Welcome( Frame ):
                         del User_id[0]
                         User_id.append(name)
                         Main_Menu()
+                        self.c_label = Label( self , text = "Login Verified",  bg = '#00b7ea',font = ("Purisa",7), fg = 'red' )
+                        self.c_label.grid( row = 9, column = 2, columnspan = 2, sticky = W+E+N+S )
+                        break
                     else:
                         print ("Incorrect Password")
                         self.label = Label(self,text ="Incorrect Password/Username" , bg = '#00b7ea',font = ("Purisa",7), fg = 'red')
