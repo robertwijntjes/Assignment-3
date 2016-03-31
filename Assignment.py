@@ -120,7 +120,7 @@ class Welcome( Frame ):
                         del User_id[0]
                         User_id.append(name)
                         Main_Menu()
-                        self.c_label = Label( self , text = "Login Verified",  bg = '#00b7ea',font = ("Purisa",7), fg = 'red' )
+                        self.c_label = Label( self , text = "Login Verified",  bg = '#00b7ea',font = ("Purisa",7), fg = '#00ff00' )
                         self.c_label.grid( row = 9, column = 2, columnspan = 2, sticky = W+E+N+S )
                         break
                     else:
