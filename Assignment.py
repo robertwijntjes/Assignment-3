@@ -6,7 +6,8 @@ import datetime
 
 modulelist = ['OOP']
 database_mod = {
-    'OOP': 'Object-oriented programming (OOP) refers to a type of computer programming (software design) in which programmers define not only the data type of a data structure, but also the types of operations (functions) that can be applied to the data structure.', 'SFGM' : 'BLOOP' }
+    'OOP': 'Object-oriented programming (OOP) refers to a type of computer programming (software design) in which programmers define not only the data type of a data structure, but also the types of operations (functions) that can be applied to the data structure.',
+    'SFGM' : 'The skills of software engineers are called upon when operational problems are encountered with computer programs and applications.Typical responsibilities include investigating current applications,liaising with users,producing specifications,costing new or modified systems,agreeing proposals,writing new software and operating manuals,testing the product to ensure that it operates satisfactorily,training users,handling support and feedback' }
 member_list = ['c14356786']
 password_list = ['password']
 language_english = ['Username','Password','New Account','Login','Sign-Out','*Passwords are Case Sensitive','CN','Add Module', 'Remove Module','Add Reminder', 'Remove Reminder','My Grades']
@@ -97,7 +98,7 @@ class Welcome( Frame ):
         check = 0
         for item in member_list:
             if(name == item ):
-                self.label = Label( self , text = "Account exists" , bg = '#00b7ea' , font = ("Purisa",7) , fg = 'red')
+                self.label = Label(self , text = "Account exists" , bg = '#00b7ea' , font = ("Purisa",7) , fg = 'red')
                 self.label.grid( row = 9 , column = 1 , columnspan = 1 , sticky = W+E+N+S )
                 break
             if(name != item):
@@ -145,7 +146,7 @@ class Main_Menu(Frame):
         new = Tk()
         new.resizable( width = FALSE , height = FALSE )
         name = User_id[0:1]
-        new.title("Username: " + str( name ))
+        new.title( str( name ) )
         new.configure( background = '#00b7ea' )
         """Module Descriptions"""
         description_box = Text( new )
@@ -165,7 +166,7 @@ class Main_Menu(Frame):
         """ Entry Box """
         signout_button = Button( new , text = "Sign-Out" , command = lambda : self.close_window() )
         signout_button.grid( row = 1, column = 6, columnspan = 1, sticky = W+E+N+S )
-        grades_button = Button( new , text = "My Grades" )
+        grades_button = Button( new , text = "My Grades" , command  = lambda : self.call_grades() )
         grades_button.grid( row = 1 , column = 4 , columnspan = 1 , sticky = W+E+N+S )
         """ Adding Modules / Delete Modules """
         add_entry = Entry( new )
@@ -181,6 +182,12 @@ class Main_Menu(Frame):
         alt_language = Button( new  , text = "CN" , command = lambda : self.alt_lan( alt_language , signout_button , grades_button , add_module , del_module , add_reminder , del_reminder ))
         alt_language.grid(row = 1 , column = 1 , columnspan = 2, sticky = W+E+N+S)
 
+    def call_grades( self ):
+        My_Grades()
+
+
+
+
     def OnDouble( self, event , box ):
         global count
         widget = event.widget
@@ -195,8 +202,6 @@ class Main_Menu(Frame):
                 else:
                     box.delete( '1.0' , END )
                     
-                    
- 
 
 
     def alt_lan(self,alt_language,signout_button,grades_button,add_module,del_module,add_reminder,del_reminder):
@@ -229,7 +234,6 @@ class Main_Menu(Frame):
     def add_modules( new , text , listbox ):
         listbox.insert( 0 , text )
         modulelist.append( text )
-        print (modulelist)
         
     def delete_reminder( new , text , listbox ):
         pos = 0
@@ -249,6 +253,24 @@ class Main_Menu(Frame):
 
     def close_window( self ):
         quit()
+
+
+class My_Grades(Frame):     
+    def __init__(self):
+        grades = Tk()
+        #grades.resizable( width = FALSE , height = FALSE )
+        name = User_id[0:1]
+        grades.title( "Grades" )
+        grades.configure( background = '#00b7ea' )
+        name_label = Label( grades , text = 'Username : ')
+        name_label.grid(row = 1 , column = 2 , columnspan = 1, sticky = W+E+N+S )
+        grade_label = Label( grades , text = str(name))
+        grade_label.grid( row = 1 , column = 3 , columnspan = 1, sticky = W+E+N+S )
+        grade_r = Label( grades, text = ' Grades')
+        grade_r.grid( row = 1 , column = 1 , columnspan = 1, sticky = W+E+N+S )
+        grades_x = Label( grades , text = "No Grades Available: Awaiting Response")
+        grades_x.grid( row = 2 , column = 1 , columnspan = 3, sticky = W+E+N+S )
+        
         
 
 def main(): 
