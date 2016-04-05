@@ -98,14 +98,17 @@ class Welcome( Frame ):
         check = 0
         for item in member_list:
             if(name == item ):
-                self.label = Label(self , text = "Account exists" , bg = '#00b7ea' , font = ("Purisa",7) , fg = 'red')
+                self.label = Label(self , text = "Account Exists" , bg = '#00b7ea' , font = ("Purisa",7) , fg = 'red')
                 self.label.grid( row = 9 , column = 1 , columnspan = 1 , sticky = W+E+N+S )
                 break
             if(name != item):
                 check = check + 1
+                
         if(check == len(member_list)):
             member_list.append( name )
             password_list.append( password )
+            self.label = Label(self , text = "Account Created" , bg = '#00b7ea' , font = ("Purisa",7) , fg = '#00ff00')
+            self.label.grid( row = 9 , column = 1 , columnspan = 1 , sticky = W+E+N+S )
         print (member_list)
         print (password_list)         
 
@@ -269,7 +272,11 @@ class My_Grades(Frame):
         grade_r = Label( grades, text = ' Grades')
         grade_r.grid( row = 1 , column = 1 , columnspan = 1, sticky = W+E+N+S )
         grades_x = Label( grades , text = "No Grades Available: Awaiting Response")
-        grades_x.grid( row = 2 , column = 1 , columnspan = 3, sticky = W+E+N+S )
+        grades_x.grid( row = 3 , column = 1 , columnspan = 3, sticky = W+E+N+S )
+        listbox_grades = Listbox( grades )
+        for item in modulelist:
+            listbox_grades.insert( END , item + ' :'  )
+            listbox_grades.grid( row = 2 , column = 1 , columnspan = 2 , sticky = W+E+N+S )
         
         
 
