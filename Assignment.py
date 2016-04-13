@@ -1,10 +1,14 @@
+
 import tkinter as tk
 from tkinter import *
 from tkinter import ttk
 from PIL import Image, ImageTk
 import datetime
+import sqlite3
+conn = sqlite3.connect('Subjects.db')
+c = conn.cursor()
 
-modulelist = ['OOP']
+modulelist = []
 database_mod = {
     'OOP': 'Object-oriented programming (OOP) refers to a type of computer programming (software design) in which programmers define not only the data type of a data structure, but also the types of operations (functions) that can be applied to the data structure.',
     'SFGM' : 'The skills of software engineers are called upon when operational problems are encountered with computer programs and applications.Typical responsibilities include investigating current applications,liaising with users,producing specifications,costing new or modified systems,agreeing proposals,writing new software and operating manuals,testing the product to ensure that it operates satisfactorily,training users,handling support and feedback' }
@@ -28,6 +32,9 @@ class Welcome( Frame ):
         self.master.resizable(width = FALSE,height = FALSE)
         self.pack()
         self.make_gui()
+        data = [line.strip() for line in open("C:/Users/robert/Desktop/SFGM Assignment/Assignment/userbase.txt", 'r')]
+        for i in data:
+            modulelist.append(i)
         """ logo """
 
     def make_gui(self):
@@ -251,7 +258,7 @@ class Main_Menu(Frame):
             idx = int(i) - pos
             listbox.delete(idx,idx)
             pos = pos + 1
-        del modulelist[i]
+        del modulelist[idx]
         
 
     def close_window( self ):
