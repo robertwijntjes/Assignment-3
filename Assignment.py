@@ -1,10 +1,15 @@
-
 import tkinter as tk
 from tkinter import *
 from tkinter import ttk
 from PIL import Image, ImageTk
 import datetime
 import sqlite3
+import os
+import sys
+from datetime import timedelta
+import time as t
+from os import path
+
 conn = sqlite3.connect('Subjects.db')
 c = conn.cursor()
 
@@ -252,6 +257,13 @@ class Main_Menu(Frame):
         formated_string = utc_datetime.strftime("%Y-%m-%d")
         listbox.insert(0,formated_string + "| " + text )
         
+        try:
+            os.mkdir("Reminders" + formated_string)
+        except:
+            print (formated_string + ' File already Exists')
+        destination = 'C:\\Users\\robert\\Desktop\\SFGM Assignment\\Assignment\\'
+        #createFile(self,destination)
+            
     def add_modules( new , text , listbox ):
         listbox.insert( 0 , text )
         modulelist.append( text )
