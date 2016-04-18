@@ -9,6 +9,7 @@ import sys
 from datetime import timedelta
 import time as t
 from os import path
+from time import strftime
 
 conn = sqlite3.connect('Subjects.db')
 c = conn.cursor()
@@ -183,7 +184,7 @@ class Main_Menu(Frame):
         signout_button = Button( new , text = "Sign-Out" , command = lambda : self.close_window() )
         signout_button.grid( row = 1, column = 6, columnspan = 1, sticky = W+E+N+S )
         grades_button = Button( new , text = "My Grades" , command  = lambda : self.call_grades(listbox) )
-        grades_button.grid( row = 1 , column = 4 , columnspan = 1 , sticky = W+E+N+S )
+        grades_button.grid( row = 1 , column = 3 , columnspan = 1 ,rowspan = 1 ,sticky = W+E+N+S )
         """ Adding Modules / Delete Modules """
         add_entry = Entry( new )
         add_entry.grid( row = 4 , column = 1 , columnspan = 1 , sticky = W+E+N+S )
@@ -191,12 +192,27 @@ class Main_Menu(Frame):
         add_module.grid( row = 5, column = 1, columnspan = 1, sticky = W+E+N+S)
         del_module = Button( new , text = "Delete Module" , command = lambda : self.delete_modules( add_entry.get() , listbox))
         del_module.grid( row = 6, column = 1 , columnspan = 1 , sticky = W+E+N+S )
-        add_reminder = Button( new , text = "Add Reminder" , command = lambda : self.add_reminder( add_entry.get() , listbox_drop ))
+        add_reminder = Button( new , text = "Add Reminder" , command = lambda : self.add_reminder( add_entry.get() , listbox_drop))
         add_reminder.grid( row = 7 , column = 1 , columnspan = 1 , sticky = W+E+N+S )
         del_reminder = Button(new , text = "Delete Reminder", command = lambda : self.delete_reminder( add_entry.get() , listbox_drop ))
         del_reminder.grid( row = 8 , column = 1 , columnspan = 1 , sticky = W+E+N+S )
         alt_language = Button( new  , text = "CN" , command = lambda : self.alt_lan( alt_language , signout_button , grades_button , add_module , del_module , add_reminder , del_reminder ))
         alt_language.grid(row = 1 , column = 1 , columnspan = 2, sticky = W+E+N+S)
+        create_file = Button(new , text = "Save Reminder" ,command = lambda : self.createFile(add_entry.get()) )
+        create_file.grid(row = 5 , column = 3 , columnspan = 4, rowspan = 4, sticky = W+E+N+S)
+
+
+    def createFile(self,text):
+        
+        dest = 'C:\\Users\\robert\\Desktop\\SFGM Assignment\\Assignment\\Reminders2016-04-18\\'
+        date = t.localtime(t.time())
+        name =  strftime("%H-%M") + '.txt'
+        if not(path.isfile(dest + name)):
+            f = open(dest + name,'w')
+            f.write(text + ('\n'*30) + 'END OF SCRIPT')
+            f.close()    
+         
+        
 
     def call_grades( self , box):
         My_Grades()
@@ -226,9 +242,6 @@ class Main_Menu(Frame):
         box.insert( END , nValue )
         
             
-            
-                    
-
 
     def alt_lan(self,alt_language,signout_button,grades_button,add_module,del_module,add_reminder,del_reminder):
         global lan_boola
@@ -260,9 +273,8 @@ class Main_Menu(Frame):
         try:
             os.mkdir("Reminders" + formated_string)
         except:
-            print (formated_string + ' File already Exists')
-        destination = 'C:\\Users\\robert\\Desktop\\SFGM Assignment\\Assignment\\'
-        #createFile(self,destination)
+            print (formated_string + 'File already Exists')
+
             
     def add_modules( new , text , listbox ):
         listbox.insert( 0 , text )
