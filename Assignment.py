@@ -172,11 +172,12 @@ class Main_Menu(Frame):
         listbox_drop = Listbox( new )
         for item in dropped_module_list:
             listbox_drop.insert( END , item )
+        listbox_drop.bind("<Double-Button-1>", lambda event : self.OnNDouble( event , description_box ))
         listbox_drop.grid( row = 3 , column = 1 , columnspan = 2 , sticky = W+E+N+S )
         """ Entry Box """
         signout_button = Button( new , text = "Sign-Out" , command = lambda : self.close_window() )
         signout_button.grid( row = 1, column = 6, columnspan = 1, sticky = W+E+N+S )
-        grades_button = Button( new , text = "My Grades" , command  = lambda : self.call_grades() )
+        grades_button = Button( new , text = "My Grades" , command  = lambda : self.call_grades(listbox) )
         grades_button.grid( row = 1 , column = 4 , columnspan = 1 , sticky = W+E+N+S )
         """ Adding Modules / Delete Modules """
         add_entry = Entry( new )
@@ -192,14 +193,12 @@ class Main_Menu(Frame):
         alt_language = Button( new  , text = "CN" , command = lambda : self.alt_lan( alt_language , signout_button , grades_button , add_module , del_module , add_reminder , del_reminder ))
         alt_language.grid(row = 1 , column = 1 , columnspan = 2, sticky = W+E+N+S)
 
-    def call_grades( self ):
+    def call_grades( self , box):
         My_Grades()
 
 
-
-
     def OnDouble( self, event , box ):
-        global count
+        #global count
         widget = event.widget
         selection=widget.curselection()
         value = widget.get(selection[0])
@@ -211,6 +210,18 @@ class Main_Menu(Frame):
                     break
                 else:
                     box.delete( '1.0' , END )
+                    
+    def OnNDouble(self , event , box):
+        global count
+        widget = event.widget
+        selection = widget.curselection()
+        value = widget.get(selection[0])
+        nValue = (widget.get(ACTIVE))
+        box.delete( '1.0' , END )
+        box.insert( END , nValue )
+        
+            
+            
                     
 
 
