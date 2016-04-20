@@ -20,8 +20,8 @@ database_mod = {
     'SFGM' : 'The skills of software engineers are called upon when operational problems are encountered with computer programs and applications.Typical responsibilities include investigating current applications,liaising with users,producing specifications,costing new or modified systems,agreeing proposals,writing new software and operating manuals,testing the product to ensure that it operates satisfactorily,training users,handling support and feedback' }
 member_list = ['c14356786']
 password_list = ['password']
-language_english = ['Username','Password','New Account','Login','Sign-Out','*Passwords are Case Sensitive','CN','Add Module', 'Remove Module','Add Reminder', 'Remove Reminder','My Grades']
-language_chinese = ['用户名','密码','新账户','登录','退出','密码区分大小写','英文','添加课程' , '删除课程',' 添加便条  ' ,'删除提醒', '      成绩     ' ]
+language_english = ['Username','Password','New Account','Login','Sign-Out','*Passwords are Case Sensitive','CN','Add Module', 'Remove Module','Add Reminder', 'Remove Reminder','My Grades','Save Reminder']
+language_chinese = ['用户名','密码','新账户','登录','退出','密码区分大小写','英文','添加课程' , '删除课程',' 添加便条  ' ,'删除提醒', '      成绩     ' , '萨沃河提醒']
 dropped_module_list = []
 check_count = [0]
 check = 0
@@ -196,10 +196,10 @@ class Main_Menu(Frame):
         add_reminder.grid( row = 7 , column = 1 , columnspan = 1 , sticky = W+E+N+S )
         del_reminder = Button(new , text = "Delete Reminder", command = lambda : self.delete_reminder( add_entry.get() , listbox_drop ))
         del_reminder.grid( row = 8 , column = 1 , columnspan = 1 , sticky = W+E+N+S )
-        alt_language = Button( new  , text = "CN" , command = lambda : self.alt_lan( alt_language , signout_button , grades_button , add_module , del_module , add_reminder , del_reminder ))
-        alt_language.grid(row = 1 , column = 1 , columnspan = 2, sticky = W+E+N+S)
         create_file = Button(new , text = "Save Reminder" ,command = lambda : self.createFile(add_entry.get()) )
         create_file.grid(row = 5 , column = 3 , columnspan = 4, rowspan = 4, sticky = W+E+N+S)
+        alt_language = Button( new  , text = "CN" , command = lambda : self.alt_lan( alt_language , signout_button , grades_button , add_module , del_module , add_reminder , del_reminder ,create_file))
+        alt_language.grid(row = 1 , column = 1 , columnspan = 2, sticky = W+E+N+S)
 
 
     def createFile(self,text):
@@ -243,7 +243,7 @@ class Main_Menu(Frame):
         
             
 
-    def alt_lan(self,alt_language,signout_button,grades_button,add_module,del_module,add_reminder,del_reminder):
+    def alt_lan(self,alt_language,signout_button,grades_button,add_module,del_module,add_reminder,del_reminder,cr_file):
         global lan_boola
         print (lan_boola)
         if(lan_boola):
@@ -254,6 +254,7 @@ class Main_Menu(Frame):
             del_module.configure( text = language_chinese[8] )
             add_reminder.configure( text = language_chinese[9] )
             del_reminder.configure( text = language_chinese[10] )
+            cr_file.configure(text = language_chinese[12])
             lan_boola = False
         else:
             add_module.configure( text = language_english[7] )
@@ -263,6 +264,7 @@ class Main_Menu(Frame):
             del_module.configure( text = language_english[8] )
             add_reminder.configure( text = language_english[9] )
             del_reminder.configure( text = language_english[10] )
+            cr_file.configure( text = language_english[12])
             lan_boola = True
         
     def add_reminder( new , text , listbox ):
@@ -271,7 +273,7 @@ class Main_Menu(Frame):
         listbox.insert(0,formated_string + "| " + text )
         
         try:
-            os.mkdir("Reminders" + formated_string)
+            os.mkdir("Reminders2016-04-18")
         except:
             print (formated_string + 'File already Exists')
 
