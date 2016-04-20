@@ -27,6 +27,7 @@ check_count = [0]
 check = 0
 lan_bool = True
 lan_boola = True
+lan_boolb = True
 User_id = ['holder']
 count = 0
 
@@ -321,6 +322,17 @@ class My_Grades(Frame):
         for item in modulelist:
             listbox_grades.insert( END , item + ' :'  )
             listbox_grades.grid( row = 2 , column = 1 , columnspan = 2 , sticky = W+E+N+S )
+        change_lan = Button( grades , text = 'CN', command = lambda : self.language_change( name_label , grade_label , grade_r , grades_x ) )
+        change_lan.grid( row = 2 , column = 3 , columnspan = 3, sticky = W+E+N+S )
+
+    def language_change(self, name_label , grade_label , grade_r , grades_x):
+        global lan_boolb
+        print (lan_boolb)
+        if(lan_boolb):
+            lan_boolb = False
+        else:
+            lan_boolb = True
+
         
         
 
