@@ -20,8 +20,8 @@ database_mod = {
     'SFGM' : 'The skills of software engineers are called upon when operational problems are encountered with computer programs and applications.Typical responsibilities include investigating current applications,liaising with users,producing specifications,costing new or modified systems,agreeing proposals,writing new software and operating manuals,testing the product to ensure that it operates satisfactorily,training users,handling support and feedback' }
 member_list = ['c14356786']
 password_list = ['password']
-language_english = ['Username','Password','New Account','Login','Sign-Out','*Passwords are Case Sensitive','CN','Add Module', 'Remove Module','Add Reminder', 'Remove Reminder','My Grades','Save Reminder']
-language_chinese = ['用户名','密码','新账户','登录','退出','密码区分大小写','英文','添加课程' , '删除课程',' 添加便条  ' ,'删除提醒', '      成绩     ' , '萨沃河提醒']
+language_english = ['Username','Password','New Account','Login','Sign-Out','*Passwords are Case Sensitive','CN','Add Module', 'Remove Module','Add Reminder', 'Remove Reminder','My Grades','Save Reminder', 'No Grades Available: Awaiting Response']
+language_chinese = ['用户名','密码','新账户','登录','退出','密码区分大小写','英文','添加课程' , '删除课程',' 添加便条  ' ,'删除提醒', '      成绩     ' , '萨沃河提醒', '没有成绩:请等一下儿' ]
 dropped_module_list = []
 check_count = [0]
 check = 0
@@ -329,8 +329,14 @@ class My_Grades(Frame):
         global lan_boolb
         print (lan_boolb)
         if(lan_boolb):
+            name_label.configure( text = language_chinese[0])
+            grade_r.configure( text = language_chinese[11])
+            grades_x.configure( text = language_chinese[13])
             lan_boolb = False
         else:
+            name_label.configure( text = language_english[0])
+            grade_r.configure( text = language_english[11])
+            grades_x.configure( text = language_english[13])
             lan_boolb = True
 
         
