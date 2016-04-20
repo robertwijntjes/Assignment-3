@@ -10,6 +10,7 @@ from datetime import timedelta
 import time as t
 from os import path
 from time import strftime
+#   LIST OF LIBRARIES USED
 
 conn = sqlite3.connect('Subjects.db')
 c = conn.cursor()
@@ -30,6 +31,7 @@ lan_boola = True
 lan_boolb = True
 User_id = ['holder']
 count = 0
+#   LIST OF GLOBAL VARIABLES AND LISTS/DICTIONARIES
 
 class Welcome( Frame ):
     def __init__( self ):
@@ -42,7 +44,7 @@ class Welcome( Frame ):
         data = [line.strip() for line in open("C:/Users/robert/Desktop/SFGM Assignment/Assignment/userbase.txt", 'r')]
         for i in data:
             modulelist.append(i)
-        """ logo """
+        #   USED FOR MASTER SETUP AND CALLING THE FUNCTION TO GENERATE THE FRAMES GUI AND ALGORITHMS.
 
     def make_gui(self):
         counter = 0
@@ -84,6 +86,7 @@ class Welcome( Frame ):
         login_a.set( language_english[3] )
         pass_a.set( language_english[1])
         user_a.set( language_english[0] )
+        #   INIT AND DISPLAY ALL GUI WHILE CALLING MANY FUNCTIONS TO IMPLEMENT THEIR USAGE SUCH AS COMPLEX DATABASE SEARCHES AND ALTERNATION OF DATA.
         
     def alt_language(self,case_a,quit_a,login_a,pass_a,user_a,n_account,toggle_a):
         
@@ -106,6 +109,7 @@ class Welcome( Frame ):
             user_a.set( language_english[0] )
             toggle_a.set( language_english[6] )
             lan_bool = True
+        #   ALTERNATES THE LOGIN FRAMES LANGUAGE WITH THE USAGE OF THE :CN BUTTON
   
 
     def new_account(self,name,password,counter):
@@ -124,10 +128,12 @@ class Welcome( Frame ):
             self.label = Label(self , text = "Account Created" , bg = '#00b7ea' , font = ("Purisa",7) , fg = '#00ff00')
             self.label.grid( row = 9 , column = 1 , columnspan = 1 , sticky = W+E+N+S )
         print (member_list)
-        print (password_list)         
+        print (password_list)
+        # USED FOR IMPLEMENTING AN ACCOUNT CREATABLE BUTTON AND ADDS THE USERNAME AND PASSWORD TO THE LIST WHICH ARE IN SYNC
 
     def quit_button(self):
         quit()
+        #   SIMPLE QUIT BUTTON
 
     def input_check(self,name,password,counter):
         for item in member_list:
@@ -152,6 +158,7 @@ class Welcome( Frame ):
                     self.label.grid( row = 9 , column = 2 , columnspan = 2 , sticky = W+E+N+S )
                 else:
                     counter = counter + 1
+    #   CHECKS IF THE PASSWORD WHICH IS IN SYNC WITH THE USERNAME IS CORRECT.IF NOT THEN DROP DOWN DISPLAYS INCORRECT MESSAGE.
                     
         
                     
@@ -201,6 +208,7 @@ class Main_Menu(Frame):
         create_file.grid(row = 5 , column = 3 , columnspan = 4, rowspan = 4, sticky = W+E+N+S)
         alt_language = Button( new  , text = "CN" , command = lambda : self.alt_lan( alt_language , signout_button , grades_button , add_module , del_module , add_reminder , del_reminder ,create_file))
         alt_language.grid(row = 1 , column = 1 , columnspan = 2, sticky = W+E+N+S)
+        #   MAIN MENU FRAME WHERE ALL ENTITIES ARE INIT.
 
 
     def createFile(self,text):
@@ -211,12 +219,14 @@ class Main_Menu(Frame):
         if not(path.isfile(dest + name)):
             f = open(dest + name,'w')
             f.write(text + ('\n'*30) + 'END OF SCRIPT')
-            f.close()    
+            f.close()
+        #   CREATES A FILE IN A PRESET REPO
          
         
 
     def call_grades( self , box):
         My_Grades()
+    #   CALLS THE GRADES CLASS
 
 
     def OnDouble( self, event , box ):
@@ -232,6 +242,7 @@ class Main_Menu(Frame):
                     break
                 else:
                     box.delete( '1.0' , END )
+        #   DISPLAYS INFO IN THE TEXT BOX WHEN DOUBLE CLICKED ON EITHER SFGM or OOP 
                     
     def OnNDouble(self , event , box):
         global count
@@ -241,6 +252,7 @@ class Main_Menu(Frame):
         nValue = (widget.get(ACTIVE))
         box.delete( '1.0' , END )
         box.insert( END , nValue )
+    #   SHOWS INFO FROM THE REMINDERS BOX IN THE TEXT BOX
         
             
 
@@ -267,6 +279,7 @@ class Main_Menu(Frame):
             del_reminder.configure( text = language_english[10] )
             cr_file.configure( text = language_english[12])
             lan_boola = True
+        #   ALTERNATES THE LANGUAGE WITHIN THE MAIN FILE
         
     def add_reminder( new , text , listbox ):
         utc_datetime = datetime.datetime.utcnow()
@@ -277,11 +290,13 @@ class Main_Menu(Frame):
             os.mkdir("Reminders2016-04-18")
         except:
             print (formated_string + 'File already Exists')
+        #   USES EXECPTIONS TO CREATE THE DIRECTORY WHERE THE FILE IS CREATED.
 
             
     def add_modules( new , text , listbox ):
         listbox.insert( 0 , text )
         modulelist.append( text )
+        #   USED FOR ADDING MODULES TO THE MODULE LISTBOX
         
     def delete_reminder( new , text , listbox ):
         pos = 0
@@ -289,6 +304,7 @@ class Main_Menu(Frame):
             idx = int(i) - pos
             listbox.delete(idx,idx)
             pos = pos + 1
+        #   USED FOR DELETING REMINDERS FROM THE REMINDER LISTBOX
             
     def delete_modules( self , text , listbox ):
         pos = 0
@@ -297,6 +313,7 @@ class Main_Menu(Frame):
             listbox.delete(idx,idx)
             pos = pos + 1
         del modulelist[idx]
+        #   DELETE MODULES FROM THE MODULE LISTBOX
         
 
     def close_window( self ):
@@ -306,7 +323,7 @@ class Main_Menu(Frame):
 class My_Grades(Frame):     
     def __init__(self):
         grades = Tk()
-        #grades.resizable( width = FALSE , height = FALSE )
+        grades.resizable( width = FALSE , height = FALSE )
         name = User_id[0:1]
         grades.title( "Grades" )
         grades.configure( background = '#00b7ea' )
@@ -324,6 +341,7 @@ class My_Grades(Frame):
             listbox_grades.grid( row = 2 , column = 1 , columnspan = 2 , sticky = W+E+N+S )
         change_lan = Button( grades , text = 'CN', command = lambda : self.language_change( name_label , grade_label , grade_r , grades_x ) )
         change_lan.grid( row = 2 , column = 3 , columnspan = 3, sticky = W+E+N+S )
+        #   INIT THE GUI
 
     def language_change(self, name_label , grade_label , grade_r , grades_x):
         global lan_boolb
@@ -338,13 +356,16 @@ class My_Grades(Frame):
             grade_r.configure( text = language_english[11])
             grades_x.configure( text = language_english[13])
             lan_boolb = True
+        #   ALTERNATING LANGUAGE
 
         
         
 
 def main(): 
     Welcome().mainloop()
+    #   BEGINS THE LOOP
 
 if __name__ == '__main__':
     main()
+    #   CALLS THE MAIN
     
